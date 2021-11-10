@@ -29,9 +29,5 @@ public class login {
     @AndroidFindBy(id = "vn.hasaki.buyer:id/nvNavView")
     public WebElement nvNavView;
 
-    private static final String VALID_PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[@#$%=:\\?]).{8,12})";
-    public static boolean validatePassWord(String password){
-        return (password != null && password.matches(VALID_PASSWORD_REGEX));
-    }
 
 }

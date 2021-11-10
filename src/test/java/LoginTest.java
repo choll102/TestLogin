@@ -10,13 +10,11 @@ import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class LoginTest extends connecting {
-
     @Test
     public void enterInvalidUsernameTest() throws IOException {
         service = startSever();
         AndroidDriver<AndroidElement>driver = capabilitities();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         login l = new login(driver);
         l.appbar.click();
         l.tvBtnLogin.click();
@@ -24,15 +22,15 @@ public class LoginTest extends connecting {
         Assert.assertEquals("Email/ Số điện thoại không hợp lệ",l.textinput_error1.getText());
         service.stop();
     }
-    @Test
-    public void enterInvalidPasswordTest() throws IOException {
+    @Test(dataProvider = "InputPassword",dataProviderClass = TestData.class)
+    public void enterInvalidPasswordTest(String inputPassword) throws IOException {
         service = startSever();
         AndroidDriver<AndroidElement> driver = capabilitities();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         login l = new login(driver);
         l.appbar.click();
         l.tvBtnLogin.click();
-        l.edtPassword.sendKeys("!@#$%");
+        l.edtPassword.sendKeys(inputPassword);
         Assert.assertEquals("Mật khẩu phải từ 6 ký tự",l.textinput_error2.getText());
         service.stop();
     }
